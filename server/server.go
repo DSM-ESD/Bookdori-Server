@@ -3,6 +3,8 @@ package server
 import (
 	"github.com/codegangsta/negroni"
 	"github.com/julienschmidt/httprouter"
+	
+	"bookdori-server/apis"
 )
 
 // Server 객체는 Server에 대한 정보를 담습니다
@@ -16,6 +18,10 @@ func New() (*Server, error) {
 	sv := new(Server)
 	sv.router = httprouter.New()
 	sv.neg = negroni.Classic()
+	
+	for i := 0; i < len(apis.APIs); i++ {
+		apis.AddAPI(sv.router, apis.APIs[i])
+	}
 	
 	sv.neg.UseHandler(sv.router)
 	
