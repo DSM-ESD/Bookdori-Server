@@ -5,6 +5,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	
 	"bookdori-server/apis"
+	"bookdori-server/files"
 )
 
 // Server 객체는 Server에 대한 정보를 담습니다
@@ -21,6 +22,10 @@ func New() (*Server, error) {
 	
 	for i := 0; i < len(apis.APIs); i++ {
 		apis.AddAPI(sv.router, apis.APIs[i])
+	}
+	
+	for i := 0; i < len(files.FileHandlers); i++ {
+		files.AddFileHandler(sv.router, files.FileHandlers[i])
 	}
 	
 	sv.neg.UseHandler(sv.router)
