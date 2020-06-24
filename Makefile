@@ -4,3 +4,4 @@ bookdori-server: main.go
 install-pkg:
 	go get "github.com/codegangsta/negroni" 
 	go get "github.com/julienschmidt/httprouter"
+	go get "go.mongodb.org/mongo-driver/mongo"
